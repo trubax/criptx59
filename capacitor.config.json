@@ -1,0 +1,48 @@
+{
+  "appId": "com.criptx.app",
+  "appName": "CriptX",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true,
+    "hostname": "app"
+  },
+  "plugins": {
+    "FirebaseAuthentication": {
+      "skipNativeAuth": false,
+      "providers": ["google.com", "anonymous"]
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    },
+    "LocalNotifications": {
+      "smallIcon": "ic_notification",
+      "iconColor": "#488AFF",
+      "sound": "notification.wav"
+    },
+    "Contacts": {
+      "displayName": "CriptX"
+    },
+    "Permissions": {
+      "camera": "description",
+      "photos": "description",
+      "storage": "description"
+    },
+    "Camera": {
+      "presentationStyle": "fullscreen"
+    }
+  },
+  "android": {
+    "backgroundColor": "#1F2937",
+    "navigationBarColor": "#1F2937",
+    "statusBarColor": "#1F2937",
+    "statusBarStyle": "DARK",
+    "scheme": "com.criptx.app",
+    "windowSoftInputMode": "adjustResize"
+  },
+  "ios": {
+    "scheme": "com.criptx.app",
+    "backgroundColor": "#1F2937",
+    "statusBarStyle": "DARK"
+  }
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#000000" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
+    <meta name="apple-mobile-web-app-title" content="CriptX" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <meta name="description" content="CriptX - Messaggistica Sicura e Privata" />
+    
+    <style>
+      :root {
+        --safe-area-top: env(safe-area-inset-top, 20px);
+        --safe-area-bottom: env(safe-area-inset-bottom, 20px);
+        --header-height: 60px;
+        --app-height: 100%;
+      }
+      
+      @supports (-webkit-touch-callout: none) {
+        :root {
+          --app-height: -webkit-fill-available;
+        }
+      }
+      
+      body {
+        min-height: var(--app-height);
+        overscroll-behavior-y: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        -webkit-tap-highlight-color: transparent;
+      }
+      
+      #root {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .main-content {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: none;
+        padding-top: calc(var(--header-height) + var(--safe-area-top));
+        padding-bottom: var(--safe-area-bottom);
+      }
+    </style>
+    
+    <!-- Previeni il comportamento "Fine" di Safari -->
+    <script>
+      if (window.navigator.standalone) {
+        window.addEventListener('load', () => {
+          window.addEventListener('beforeunload', (e) => {
+            e.preventDefault();
+            e.returnValue = '';
+          });
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Previeni solo il comportamento di pull-to-refresh
+      document.body.addEventListener('touchmove', function(e) {
+        if (window.pageYOffset === 0 && e.touches[0].pageY > 0) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+    </script>
+  </body>
+</html> 

@@ -1,0 +1,1890 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+  --primary: #1F2937;
+  --secondary: #374151;
+  --accent: #3B82F6;
+  --background: #111827;
+  --text: #FFFFFF;
+  --divide: #374151;
+  --app-height: 100%;
+  --safe-area-top: env(safe-area-inset-top);
+  --safe-area-bottom: env(safe-area-inset-bottom);
+  --header-height: 56px;
+  --slide-direction: -100%;
+}
+
+/* Fix per iOS */
+@supports (-webkit-touch-callout: none) {
+  :root {
+    --app-height: -webkit-fill-available;
+  }
+  
+  body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+    background-color: #000;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .ios-scroll-container {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    position: relative;
+    touch-action: pan-y;
+  }
+  
+  .ios-content {
+    min-height: 100%;
+    padding-bottom: var(--safe-area-bottom);
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.ios-page-container {
+  height: var(--app-height);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ios-scroll-view {
+  flex: 1;
+  position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  padding-top: var(--header-height, 64px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 60px);
+}
+
+/* Classi di utilità per i temi */
+.theme-bg-primary {
+  background-color: var(--primary);
+}
+
+.theme-bg-secondary {
+  background-color: var(--secondary);
+}
+
+.theme-bg-accent {
+  background-color: var(--accent);
+}
+
+.theme-bg {
+  background-color: var(--background);
+}
+
+.theme-text {
+  color: var(--text);
+}
+
+.theme-accent {
+  color: var(--accent);
+}
+
+.theme-divide {
+  border-color: var(--divide);
+}
+
+.theme-border-accent {
+  border-color: var(--accent);
+}
+
+.theme-glow {
+  box-shadow: 0 0 20px var(--accent);
+}
+
+.theme-glow-sm {
+  filter: drop-shadow(0 0 3px var(--accent));
+}
+
+.hover\:theme-bg-secondary:hover {
+  background-color: var(--secondary);
+}
+
+.hover\:theme-bg-accent:hover {
+  background-color: var(--accent);
+}
+
+.hover\:theme-text:hover {
+  color: var(--text);
+}
+
+/* Opacità */
+.opacity-70 {
+  opacity: 0.7;
+}
+
+/* Transizioni */
+.theme-transition {
+  transition: all 0.3s ease;
+}
+
+/* Scrollbar personalizzata */
+.settings-container {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 84px; /* altezza pulsante + padding */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  z-index: 20;
+  background: var(--bg);
+}
+
+.create-group-button {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  padding: 0 1rem;
+  z-index: 30;
+  background: var(--bg);
+}
+
+.settings-container::-webkit-scrollbar {
+  display: none;
+}
+
+.settings-container:hover {
+  scrollbar-width: thin;
+  -ms-overflow-style: auto;
+}
+
+.settings-container:hover::-webkit-scrollbar {
+  display: block;
+  width: 6px;
+}
+
+.settings-container:hover::-webkit-scrollbar-track {
+  background-color: var(--secondary);
+}
+
+.settings-container:hover::-webkit-scrollbar-thumb {
+  background-color: var(--accent);
+  border-radius: 9999px;
+}
+
+.settings-container:hover::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text);
+}
+
+/* Aggiungi queste nuove classi */
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.text-red-500 {
+  color: #EF4444;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Shadow utilities */
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Scale utilities */
+.scale-105 {
+  transform: scale(1.05);
+}
+
+.scale-110 {
+  transform: scale(1.1);
+}
+
+/* Z-index utilities */
+.z-10 {
+  z-index: 10;
+}
+
+.z-40 {
+  z-index: 40;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+/* Transition utilities */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-200 {
+  transition-duration: 200ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+/* Border utilities */
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.last\:border-b-0:last-child {
+  border-bottom-width: 0;
+}
+
+/* Spacing utilities */
+.space-x-2 > * + * {
+  margin-left: 0.5rem;
+}
+
+.space-x-3 > * + * {
+  margin-left: 0.75rem;
+}
+
+.space-x-4 > * + * {
+  margin-left: 1rem;
+}
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari and Opera */
+  }
+}
+
+/* Aggiungi al tuo file CSS globale */
+.ios-fullscreen {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  min-height: -webkit-fill-available;
+}
+
+.fullscreen {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Aggiungi questi stili al tuo file CSS globale */
+.scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  position: relative;
+  width: 100%;
+  padding-bottom: var(--safe-area-bottom);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Blocca lo scroll del body quando un modal è aperto */
+.modal-open {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* Stili per le bolle dei messaggi */
+.message-container {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 0.25rem;
+  padding: 0 1rem;
+  position: relative;
+}
+
+/* Per i messaggi consecutivi dello stesso mittente */
+.message-container + .message-container {
+  margin-top: 0.125rem;
+}
+
+.message-container-sent {
+  justify-content: flex-end;
+}
+
+.message-container-received {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  position: relative;
+  max-width: 60%;
+  min-width: 50px;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  padding: 0.75rem;
+  display: inline-block;
+}
+
+.message-bubble-sent {
+  background-color: var(--accent);
+  color: var(--text);
+  border-radius: 1.25rem 0.25rem 1.25rem 1.25rem;
+  margin-right: 0.5rem;
+  float: right;
+  transform-origin: right center;
+  max-width: calc(60% + 10vw);
+  position: relative;
+}
+
+.message-bubble-received {
+  background-color: var(--secondary);
+  color: var(--text);
+  border-radius: 0.25rem 1.25rem 1.25rem 1.25rem;
+  margin-left: 0.5rem;
+  float: left;
+  transform-origin: left center;
+  max-width: calc(60% + 10vw);
+}
+
+.message-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.message-text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  word-break: normal;
+  white-space: pre-wrap;
+  padding-bottom: 16px;
+}
+
+.message-status {
+  position: absolute;
+  bottom: 4px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.tick-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tick-single {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tick-double {
+  display: flex;
+  align-items: center;
+  margin-left: -4px;
+}
+
+.tick-container.tick-read .tick-single,
+.tick-container.tick-read .tick-double {
+  color: #34D399;
+}
+
+/* Stili per le spunte di stato */
+.tick-sent {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.tick-delivered {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.tick-read {
+  color: #34D399; /* Verde per le spunte di lettura */
+}
+
+/* Animazione per la transizione del colore */
+.message-status svg {
+  transition: color 0.2s ease-in-out;
+}
+
+/* Posizionamento delle spunte sovrapposte per l'effetto doppia spunta */
+.double-tick {
+  position: relative;
+  width: 20px;
+  height: 14px;
+}
+
+.tick {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.tick-first {
+  left: 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tick-second {
+  left: 6px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tick-delivered .tick {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tick-read .tick {
+  color: #34D399;  /* Verde per le spunte di lettura */
+}
+
+/* Media queries per la responsività */
+@media (max-width: 640px) {
+  .message-bubble {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .message-bubble {
+    max-width: 85%;
+  }
+}
+
+/* Aggiungi dopo le classi di tema esistenti */
+.fixed {
+  position: fixed;
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.bg-black\/30 {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+.overscroll-none {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.app-container {
+  height: 100vh;
+  height: var(--app-height);
+  width: 100vw;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--theme-background);
+  padding-top: var(--safe-area-top);
+  padding-bottom: var(--safe-area-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.page-content {
+  flex: 1;
+  position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  padding-top: var(--header-height);
+  padding-bottom: calc(var(--safe-area-bottom) + 60px);
+}
+
+/* Ottimizzazioni per schermi piccoli */
+@media screen and (max-width: 360px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+/* Previeni zoom su input iOS */
+@supports (-webkit-touch-callout: none) {
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+.pwa-container {
+  height: 100vh;
+  height: var(--app-height);
+  width: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: var(--safe-area-top);
+  padding-bottom: var(--safe-area-bottom);
+}
+
+.pwa-content {
+  flex: 1;
+  position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Ottimizzazioni per notch e bordi arrotondati */
+.safe-area-top {
+  padding-top: var(--safe-area-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: var(--safe-area-bottom);
+}
+
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background: var(--header-bg);
+  z-index: 100;
+  padding-top: var(--safe-area-top);
+  transform: translateZ(0);
+  touch-action: none;
+}
+
+.filters-bar {
+  position: sticky;
+  top: calc(var(--header-height) + var(--safe-area-top));
+  background: var(--bg-color);
+  z-index: 90;
+  padding: 0.5rem;
+  transform: translateZ(0);
+}
+
+.pwa-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: auto;
+}
+
+.pwa-content {
+  flex: 1;
+  position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.mobile-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  background-color: var(--bg-color);
+}
+
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  background: var(--card-bg);
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 480px) {
+  .login-box {
+    max-width: 90%;
+    padding: 1.5rem 1rem;
+    margin: 1rem;
+  }
+  
+  .login-container {
+    padding: 1rem;
+    justify-content: center;
+  }
+  
+  /* Ottimizza dimensioni pulsanti per mobile */
+  .login-box button {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Ottimizza input per mobile */
+  .login-box input {
+    font-size: 16px !important;
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Ottimizza spaziature per mobile */
+  .login-box .space-y-4 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Previeni zoom su input iOS */
+@supports (-webkit-touch-callout: none) {
+  .login-box input {
+    font-size: 16px !important;
+  }
+}
+
+/* Base styles per mobile */
+:root {
+  --app-height: 100%;
+  --safe-area-top: env(safe-area-inset-top);
+  --safe-area-bottom: env(safe-area-inset-bottom);
+  --header-height: 56px;
+}
+
+/* Fix per l'altezza su iOS */
+@supports (-webkit-touch-callout: none) {
+  :root {
+    --app-height: -webkit-fill-available;
+  }
+  
+  /* Nascondi barre browser iOS */
+  body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    background-color: #000; /* Per evitare flash bianchi */
+  }
+}
+
+/* Container principale unificato */
+.mobile-container {
+  height: 100vh;
+  height: var(--app-height);
+  width: 100%;
+  position: fixed;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Container di scroll unificato */
+.scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  position: relative;
+  width: 100%;
+  padding-bottom: var(--safe-area-bottom);
+}
+
+/* Media query per schermi piccoli */
+@media screen and (max-width: 360px) {
+  :root {
+    --header-height: 48px;
+  }
+  
+  html {
+    font-size: 14px;
+  }
+  
+  .scroll-container {
+    padding-bottom: calc(var(--safe-area-bottom) + 8px);
+  }
+}
+
+/* Previeni bounce effect su iOS */
+body {
+  min-height: var(--app-height);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ottimizzazioni per input su mobile */
+input, 
+textarea, 
+select {
+  font-size: 16px !important;
+  max-height: 90vh;
+}
+
+.users-container {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  position: relative;
+  height: 100%;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Stile per nascondere elementi browser */
+.standalone-mode {
+  padding-top: env(safe-area-inset-top);
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+/* Fix per iOS PWA */
+:root {
+  --safe-area-top: env(safe-area-inset-top);
+  --safe-area-bottom: env(safe-area-inset-bottom);
+  --app-height: 100%;
+}
+
+@supports (-webkit-touch-callout: none) {
+  :root {
+    --app-height: -webkit-fill-available;
+  }
+  
+  body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+    background-color: #000;
+  }
+  
+  .ios-scroll-container {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    position: relative;
+  }
+  
+  .ios-content {
+    min-height: 100%;
+    padding-bottom: var(--safe-area-bottom);
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Setup container ottimizzato */
+.setup-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  width: 100%;
+  padding: 1rem;
+  padding-top: calc(env(safe-area-inset-top) + 1rem);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);
+  background-color: var(--background);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Rimuovi questi stili conflittuali */
+.pwa-container {
+  overflow: auto;
+  position: relative;
+}
+
+/* Stile comune per i menu delle impostazioni */
+.settings-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.settings-menu-item:hover {
+  background-color: var(--secondary);
+}
+
+.settings-menu-content {
+  padding: 1rem;
+  background-color: var(--secondary);
+  border-top: 1px solid var(--divide);
+}
+
+.settings-menu-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.settings-menu-title h3 {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.settings-menu-description {
+  font-size: 0.875rem;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+/* Animazione per il menu delle impostazioni */
+@keyframes settings-expand {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+    transform: translateY(0);
+  }
+}
+
+.settings-expand-animation {
+  animation: settings-expand 0.3s ease-out forwards;
+  overflow: hidden;
+}
+
+.settings-content {
+  transform-origin: top;
+  will-change: transform, opacity, max-height;
+}
+
+/* Animazioni per la navigazione tra pagine */
+@keyframes slide-exit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(var(--slide-direction, -100%));
+  }
+}
+
+@keyframes slide-enter {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--slide-direction, -100%) * -1));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.page-slide-exit {
+  animation: slide-exit 0.15s ease-out forwards;
+}
+
+.page-slide-enter {
+  animation: slide-enter 0.3s ease-out forwards;
+}
+
+.page-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  will-change: transform, opacity;
+}
+
+.page-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.page-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  transform: translateZ(0);
+}
+
+.page-transition {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Aggiungi queste animazioni */
+@keyframes filter-slide-enter {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.filter-content {
+  animation: filter-slide-enter 0.3s ease-out forwards;
+  will-change: transform, opacity;
+  transform-origin: top;
+}
+
+.filter-container {
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes slide-left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.users-list-transition {
+  animation: var(--slide-direction, slide-left) 0.3s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+[data-filter="registered"] .users-list-transition {
+  --slide-direction: slide-right;
+}
+
+[data-filter="anonymous"] .users-list-transition {
+  --slide-direction: slide-left;
+}
+
+.page-content {
+  padding-top: 64px;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.page-transition {
+  animation: slide-left 0.3s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.page-slide-enter {
+  animation-name: slide-left;
+}
+
+.fixed-header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.fixed-search-filters {
+  position: sticky;
+  top: 64px; /* altezza dell'header */
+  z-index: 20;
+  background: var(--bg);
+}
+
+.scrollable-users-list {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 120px; /* spazio per header + search + filters */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+.users-list-transition {
+  animation: var(--slide-direction, slide-left) 0.3s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.fixed-header-section {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background: var(--bg);
+}
+
+.search-filters-container {
+  width: 100%;
+  padding: 8px 0;
+}
+
+.users-list-container {
+  margin-top: 130px;
+  height: calc(100vh - 130px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+.users-list-transition {
+  animation: var(--slide-direction, slide-left) 0.3s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: var(--bg);
+}
+
+.page-content-under-header {
+  margin-top: 64px;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+.search-filters-section {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--bg);
+  border-bottom: 1px solid var(--divide-color);
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: var(--bg);
+}
+
+.page-content {
+  padding-top: 112px; /* altezza header (64px) + filtri (48px) */
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.smooth-transition {
+  animation: smooth-slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+@keyframes smooth-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.users-list-container {
+  height: calc(100vh - 112px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+.fixed-header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.fixed-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--bg);
+}
+
+.filters-section {
+  position: sticky;
+  top: 64px;
+  z-index: 30;
+  background: var(--bg);
+}
+
+.chat-list-container {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  position: fixed;
+  top: 112px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+}
+
+body {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chat-content {
+  width: 100%;
+  min-height: 100%;
+}
+
+.chat-list {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 0; /* rimuove qualsiasi margine inferiore */
+}
+
+.empty-state-container {
+  position: fixed;
+  top: 112px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  z-index: 20;
+}
+
+.empty-state-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+@media (max-width: 640px) {
+  .empty-state-content {
+    padding: 0.5rem;
+  }
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: var(--bg);
+}
+
+.fixed-filters {
+  position: fixed;
+  top: 64px; /* altezza dell'header */
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background: var(--bg);
+}
+
+.chat-list-container {
+  margin-top: 112px; /* header (64px) + filtri (48px) */
+  height: calc(100vh - 112px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  padding-bottom: 80px; /* Spazio per la barra di navigazione + extra padding */
+}
+
+.chat-content {
+  width: 100%;
+  min-height: 100%;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.chat-list {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  padding-bottom: var(--safe-area-bottom, 16px);
+}
+
+.chat-page-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 40;
+}
+
+.fixed-filters {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  height: 48px;
+  z-index: 30;
+}
+
+.chat-content-area {
+  position: fixed;
+  top: 112px;
+  left: 0;
+  right: 0;
+  bottom: 64px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+.error-message {
+  padding: 1rem;
+  color: #EF4444;
+  text-align: center;
+}
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 112px);
+  padding: 1rem;
+  text-align: center;
+}
+
+.empty-title {
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.empty-subtitle {
+  font-size: 0.875rem;
+  color: var(--text);
+  opacity: 0.7;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+@keyframes slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.page-transition {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  will-change: transform;
+}
+
+.slide-left {
+  animation-name: slide-left;
+}
+
+.slide-right {
+  animation-name: slide-right;
+}
+
+.page-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+@keyframes slide-left {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-right {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.page-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  will-change: transform, opacity;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  background: var(--bg);
+  z-index: 1;
+}
+
+.slide-left {
+  animation-name: slide-left;
+}
+
+.slide-right {
+  animation-name: slide-right;
+}
+
+.page-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+@keyframes slide-to-left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-to-right {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-exit-to-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-exit-to-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.page-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.page-transition {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+.slide-enter-to-left {
+  animation-name: slide-to-left;
+}
+
+.slide-enter-to-right {
+  animation-name: slide-to-right;
+}
+
+.slide-exit-to-left {
+  animation-name: slide-exit-to-left;
+}
+
+.slide-exit-to-right {
+  animation-name: slide-exit-to-right;
+}
+
+.contacts-list {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* Base styles e utilities comuni */
+:root {
+  --app-height: 100%;
+  --safe-area-top: env(safe-area-inset-top);
+  --safe-area-bottom: env(safe-area-inset-bottom);
+  --header-height: 56px;
+}
+
+/* Layout comune */
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: var(--bg);
+}
+
+/* Stili pagina Chat */
+.chat-page {
+  .chat-list-container {
+    position: fixed;
+    top: 112px;
+    left: 0;
+    right: 0;
+    bottom: 64px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    z-index: 20;
+    background: var(--bg);
+  }
+
+  .filters-section {
+    position: sticky;
+    top: 64px;
+    z-index: 30;
+    background: var(--bg);
+  }
+}
+
+/* Stili pagina Contatti */
+.contacts-page {
+  .fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    z-index: 40;
+    background: var(--bg);
+  }
+
+  .search-filters-section {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    background: var(--bg);
+    padding: 1rem;
+  }
+
+  .contacts-list-container {
+    position: fixed;
+    top: 128px;
+    left: 0;
+    right: 0;
+    bottom: 64px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    z-index: 20;
+    background: var(--bg);
+  }
+}
+
+/* Stili pagina Utenti */
+.users-page {
+  .users-list-container {
+    position: fixed;
+    top: 128px;
+    left: 0;
+    right: 0;
+    bottom: 64px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    z-index: 20;
+    background: var(--bg);
+  }
+
+  .fixed-search-filters {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    height: 64px;
+    z-index: 30;
+    background: var(--bg);
+  }
+}
+
+/* Stili pagina Gruppo */
+.group-page {
+  .fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    z-index: 40;
+    background: var(--bg);
+  }
+
+  .group-name-section {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    height: 88px;
+    z-index: 30;
+    background: var(--bg);
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .search-box-section {
+    position: fixed;
+    top: 156px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    z-index: 30;
+    background: var(--bg);
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .group-list-container {
+    position: fixed;
+    top: 216px;
+    left: 0;
+    right: 0;
+    bottom: 128px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    z-index: 20;
+    background: var(--bg);
+    padding: 0 1rem;
+  }
+
+  .create-group-button-container {
+    position: fixed;
+    bottom: 64px;
+    left: 0;
+    right: 0;
+    height: 64px;
+    z-index: 30;
+    background: var(--bg);
+    border-top: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+  }
+}
+
+.settings-page {
+  .fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    z-index: 40;
+    background: var(--bg);
+  }
+
+  .settings-content-section {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 64px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    z-index: 20;
+    background: var(--bg);
+    padding: 1rem;
+  }
+}
+
+:root {
+  --safe-area-top: env(safe-area-inset-top);
+  --safe-area-bottom: env(safe-area-inset-bottom);
+  --app-height: 100%;
+}
+
+@supports (-webkit-touch-callout: none) {
+  :root {
+    --app-height: -webkit-fill-available;
+  }
+  
+  body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+    background-color: #000;
+  }
+  
+  .ios-scroll-container {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    position: relative;
+    touch-action: pan-y;
+  }
+  
+  .ios-content {
+    min-height: 100%;
+    padding-bottom: var(--safe-area-bottom);
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.app-container {
+  height: 100vh;
+  height: var(--app-height);
+  width: 100vw;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--theme-background);
+  padding-top: var(--safe-area-top);
+  padding-bottom: var(--safe-area-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.scroll-view {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  position: relative;
+  width: 100%;
+  scroll-behavior: smooth;
+  padding-bottom: var(--safe-area-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+/* Aggiustiamo i container specifici */
+.chat-list-container,
+.contacts-container,
+.settings-container,
+.group-container,
+.users-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* Aggiungiamo supporto specifico per iOS */
+@supports (-webkit-touch-callout: none) {
+  .app-container {
+    height: -webkit-fill-available;
+  }
+  
+  .scroll-view {
+    height: -webkit-fill-available;
+  }
+}

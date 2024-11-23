@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CriptX - Offline</title>
+    <style>
+        body {
+            background-color: #111827;
+            color: white;
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 20px;
+        }
+        .retry-button {
+            background-color: #3B82F6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img src="/offline-icon.svg" alt="Offline" class="icon">
+    <h1>Sei offline</h1>
+    <p>Controlla la tua connessione e riprova</p>
+    <button class="retry-button" onclick="window.location.reload()">Riprova</button>
+</body>
+</html> 

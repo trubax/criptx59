@@ -1,0 +1,37 @@
+:root {
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --app-height: 100%;
+  --header-height: 56px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+.native-container {
+  height: 100vh;
+  height: var(--app-height);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: var(--theme-background);
+}
+
+.native-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  position: relative;
+  width: 100%;
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+} 
